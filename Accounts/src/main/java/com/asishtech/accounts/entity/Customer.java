@@ -23,7 +23,7 @@ public class Customer extends BaseDomain implements Serializable  {
     private String name;
 
     @Column(nullable = false)
-    private String email_id;
+    private String emailId;
 
     @Column(name = "mobile_no",nullable = false)
     private String mobileNumber;
