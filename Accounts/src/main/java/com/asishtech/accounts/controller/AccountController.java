@@ -5,24 +5,24 @@ import com.asishtech.accounts.dto.AccountDTO;
 import com.asishtech.accounts.dto.CustomerDTO;
 import com.asishtech.accounts.dto.ResponseDTO;
 import com.asishtech.accounts.services.AccountService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+
+@RequiredArgsConstructor
 @RestController
 @RequestMapping(value = "/api", produces = MediaType.APPLICATION_JSON_VALUE)
 public class AccountController {
-    private AccountService accountService;
+    private final AccountService accountService;
 
     @GetMapping("/get-accounts")
     public String getAccounts() {
         return "Hello Accounts";
     }
-
+    @PostMapping("/create-account")
     public ResponseEntity<ResponseDTO> createAccount(@RequestBody CustomerDTO customerDTO) {
 
         accountService.createAccount(customerDTO);
