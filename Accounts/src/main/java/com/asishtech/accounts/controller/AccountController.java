@@ -38,4 +38,20 @@ public class AccountController {
                 .status(HttpStatus.CREATED)
                 .body(new ResponseDTO(AccountConstants.STATUS_201, AccountConstants.MESSAGE_201));
     }
+
+    @DeleteMapping("/delete-account")
+    public ResponseEntity<ResponseDTO> deleteAccountDetails(@RequestParam
+                                                            @Pattern(regexp="(^$|[0-9]{10})",message = "Mobile number must be 10 digits")
+                                                            String mobileNumber) {
+        boolean isDeleted = accountService.deleteAccount(mobileNumber);
+        if(isDeleted) {
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(new ResponseDTO(AccountConstants.STATUS_200, AccountConstants.MESSAGE_200));
+        }else{
+            return ResponseEntity
+                    .status(HttpStatus.EXPECTATION_FAILED)
+                    .body(new ResponseDTO(AccountConstants.STATUS_417, AccountConstants.MESSAGE_417_DELETE));
+        }
+    }
 }

@@ -23,4 +23,6 @@ spring:
       maintainTimeStats: false
       minimumIdle: 2
       maximumPoolSize: 10
-
+  jpa:
+    hibernate:
+      ddl-auto: update

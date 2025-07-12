@@ -1,4 +1,4 @@
-package com.asishtech.accounts.audit;
+package com.asishtech.loans.audit;
 
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.stereotype.Component;

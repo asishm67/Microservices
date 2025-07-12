@@ -11,6 +11,7 @@ import com.asishtech.accounts.mapper.CustomerMapper;
 import com.asishtech.accounts.repository.AccountRepository;
 import com.asishtech.accounts.repository.CustomerRepository;
 import com.asishtech.accounts.services.AccountService;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -53,6 +54,15 @@ public class AccountServiceImpl implements AccountService {
         CustomerDTO customerDto = CustomerMapper.toCustomerDTO(customer);
         customerDto.setAccountsDto(AccountMapper.toAccountDTO(account));
         return customerDto;
+    }
+    @Override
+    public boolean deleteAccount(String mobileNumber) {
+        Customer customer = customerRepository.findByMobileNumber(mobileNumber).orElseThrow(
+                () -> new ResourceNotFoundException("Customer", "mobileNumber", mobileNumber)
+        );
+        accountRepository.deleteByCustomerId(customer.getId());
+        customerRepository.deleteById(customer.getId());
+        return true;
     }
 
     private Account createAccount(Customer customer) {
