@@ -5,23 +5,30 @@ import com.asishtech.accounts.dto.AccountDTO;
 import com.asishtech.accounts.dto.CustomerDTO;
 import com.asishtech.accounts.dto.ResponseDTO;
 import com.asishtech.accounts.services.AccountService;
+import jakarta.validation.constraints.Pattern;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 
 @RequiredArgsConstructor
 @RestController
 @RequestMapping(value = "/api", produces = MediaType.APPLICATION_JSON_VALUE)
+@Validated
 public class AccountController {
     private final AccountService accountService;
 
-    @GetMapping("/get-accounts")
-    public String getAccounts() {
-        return "Hello Accounts";
+    @GetMapping("/fetch-account")
+    public ResponseEntity<CustomerDTO> fetchAccountDetails(@RequestParam
+                                                           @Pattern(regexp="(^$|[0-9]{10})",message = "Mobile number must be 10 digits")
+                                                           String mobileNumber) {
+        CustomerDTO customerDto = accountService.fetchAccount(mobileNumber);
+        return ResponseEntity.status(HttpStatus.OK).body(customerDto);
     }
+
     @PostMapping("/create-account")
     public ResponseEntity<ResponseDTO> createAccount(@RequestBody CustomerDTO customerDTO) {
 

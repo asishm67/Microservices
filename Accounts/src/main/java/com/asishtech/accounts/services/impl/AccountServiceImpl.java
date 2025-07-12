@@ -5,6 +5,8 @@ import com.asishtech.accounts.dto.CustomerDTO;
 import com.asishtech.accounts.entity.Account;
 import com.asishtech.accounts.entity.Customer;
 import com.asishtech.accounts.exception.CustomerAlreadyExistsException;
+import com.asishtech.accounts.exception.ResourceNotFoundException;
+import com.asishtech.accounts.mapper.AccountMapper;
 import com.asishtech.accounts.mapper.CustomerMapper;
 import com.asishtech.accounts.repository.AccountRepository;
 import com.asishtech.accounts.repository.CustomerRepository;
@@ -34,6 +36,23 @@ public class AccountServiceImpl implements AccountService {
         Customer savedCustomer = customerRepository.save(customer);
         Account account = createAccount(savedCustomer);
         accountRepository.save(account);
+    }
+
+    /**
+     * @param mobileNumber - Input Mobile Number
+     * @return Accounts Details based on a given mobileNumber
+     */
+    @Override
+    public CustomerDTO fetchAccount(String mobileNumber) {
+        Customer customer = customerRepository.findByMobileNumber(mobileNumber).orElseThrow(
+                () -> new ResourceNotFoundException("Customer", "mobileNumber", mobileNumber)
+        );
+        Account account = accountRepository.findByCustomerId(customer.getId()).orElseThrow(
+                () -> new ResourceNotFoundException("Account", "customerId", customer.getId().toString())
+        );
+        CustomerDTO customerDto = CustomerMapper.toCustomerDTO(customer);
+        customerDto.setAccountsDto(AccountMapper.toAccountDTO(account));
+        return customerDto;
     }
 
     private Account createAccount(Customer customer) {

@@ -4,4 +4,5 @@ import com.asishtech.accounts.dto.CustomerDTO;
 
 public interface AccountService {
     void createAccount(CustomerDTO customerDTO);
+    CustomerDTO fetchAccount(String mobileNumber);
 }
