@@ -1,0 +1,17 @@
+spring:
+  config:
+    activate:
+      on-profile: prod
+
+build:
+  version: "1.0.0-prod"
+
+application:
+  name: cards
+  message: "Welcome to Cards Microservice ready for Production"
+  contactDetails:
+    name: "Asish-Lead Prod"
+    email: "asishm67@gmail.com"
+  onCallSupport:
+    - (+91) 1234567890
+    - (+91) 9012345678

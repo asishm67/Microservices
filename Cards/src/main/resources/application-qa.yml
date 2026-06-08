@@ -1,0 +1,17 @@
+spring:
+  config:
+    activate:
+      on-profile: qa
+
+build:
+  version: "1.0.0-qa"
+
+application:
+  name: cards
+  message: "Welcome to Cards Microservice ready for QA"
+  contactDetails:
+    name: "Asish- QA Lead"
+    email: "asishm67@gmail.com"
+  onCallSupport:
+    - (+91) 1234567890
+    - (+91) 9012345678
