@@ -21,16 +21,3 @@ spring:
       maintainTimeStats: false
       minimumIdle: 2
       maximumPoolSize: 10
-build:
-  version: "1.0.0"
-
-
-application:
-  name: accounts
-  message: "Welcome to Accounts Microservice"
-  contactDetails:
-    name: "Asish-Developer"
-    email: "asishm67@gmail.com"
-  onCallSupport:
-    - (+91) 1234567890
-    - (+91) 9012345678
