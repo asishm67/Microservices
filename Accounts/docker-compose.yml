@@ -11,7 +11,7 @@ services:
     networks:
       - asishtech-bank
   loans:
-    image: "asishtech/loans:s2"
+    image: "asishtech/loans:s1"
     container_name: loans-ms
     ports:
       - "8081:8081"
@@ -22,7 +22,7 @@ services:
     networks:
       - asishtech-bank
   cards:
-    image: "asishtech/cards:s3"
+    image: "asishtech/cards:s1"
     container_name: cards-ms
     ports:
       - "8082:8082"
